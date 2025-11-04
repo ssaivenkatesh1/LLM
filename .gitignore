@@ -229,3 +229,5 @@ Thumbs.db
 *.tmp
 *.swp
 .vscode/
+
+.aider*
