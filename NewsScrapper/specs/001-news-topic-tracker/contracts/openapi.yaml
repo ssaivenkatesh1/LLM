@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Global News Topic Tracker API
+  version: 1.0.0
+  description: API for scraping and summarizing news topics.
+paths:
+  /topics:
+    get:
+      summary: Get trending topics
+      description: Returns a list of trending topics with their latest summaries.
+      parameters:
+        - in: query
+          name: llm_provider
+          schema:
+            type: string
+            enum: [gemini, openai]
+          required: false
+          description: The LLM provider to use for summarization, overriding the default.
+      responses:
+        '200':
+          description: A list of topics and summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicWithSummary'
+  /config:
+    get:
+      summary: Get current configuration
+      description: Returns the current system configuration.
+      responses:
+        '200':
+          description: The current configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+    post:
+      summary: Update configuration
+      description: Updates the system configuration, e.g., the default LLM provider.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Config'
+      responses:
+        '200':
+          description: Configuration updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+
+components:
+  schemas:
+    TopicWithSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        summary:
+          type: string
+        llm_provider:
+          type: string
+        summary_created_at:
+          type: string
+          format: date-time
+    Config:
+      type: object
+      properties:
+        llm_provider:
+          type: string
+          enum: [gemini, openai]

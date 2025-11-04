@@ -1,0 +1,7 @@
+<div>
+  <label for="llm-provider">Select LLM Provider:</label>
+  <select id="llm-provider" [(ngModel)]="llmProvider" (change)="updateProvider()">
+    <option value="gemini">Gemini</option>
+    <option value="openai">OpenAI</option>
+  </select>
+</div>

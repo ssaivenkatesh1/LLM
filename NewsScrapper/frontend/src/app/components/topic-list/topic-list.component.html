@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let topic of topics">
+    <h2>{{ topic.summary }}</h2>
+    <div class="summary-text"><a [href]="topic.url" target="_blank">{{ topic.name }}</a></div>
+  </li>
+</ul>
