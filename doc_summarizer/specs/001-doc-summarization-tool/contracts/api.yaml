@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Document Summarization API
+  version: 1.0.0
+  description: API for summarizing uploaded PDF documents.
+
+paths:
+  /summarize:
+    post:
+      summary: Summarize a PDF document
+      description: Uploads a PDF file, extracts the text, and returns a generated summary.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The PDF file to summarize.
+      responses:
+        '200':
+          description: Successful summarization.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary_text:
+                    type: string
+                    example: "This is the generated summary."
+                  original_word_count:
+                    type: integer
+                    example: 1500
+                  summary_word_count:
+                    type: integer
+                    example: 250
+        '400':
+          description: Bad Request - Invalid file type or other client-side error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid file type. Only PDF files are accepted."
+        '500':
+          description: Internal Server Error - Summarization failed or other server-side error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Failed to process the document."
