@@ -1,0 +1,34 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Meeting Note Taker API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/upload-audio/": {
+      "post": {
+        "summary": "Upload an audio file for processing.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The structured notes and tasks generated from the audio."
+          }
+        }
+      }
+    }
+  }
+}

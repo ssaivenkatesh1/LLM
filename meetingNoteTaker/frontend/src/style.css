@@ -1,0 +1,13 @@
+body {
+    font-family: sans-serif;
+    margin: 2em;
+}
+
+#upload-form {
+    margin-bottom: 2em;
+}
+
+#results {
+    border: 1px solid #ccc;
+    padding: 1em;
+}
