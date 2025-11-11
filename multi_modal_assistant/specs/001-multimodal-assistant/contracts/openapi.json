@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Multimodal Assistant API",
+    "version": "1.0.0",
+    "description": "API for submitting queries to the multimodal assistant."
+  },
+  "paths": {
+    "/api/assistant": {
+      "post": {
+        "summary": "Submit a query",
+        "description": "Submits a query with an optional image and optional text to the assistant.",
+        "operationId": "submitQuery",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The text question."
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The image file."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "The generated answer."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid file type, file too large)."
+          },
+          "500": {
+            "description": "Internal server error (e.g., model failure)."
+          }
+        }
+      }
+    }
+  }
+}

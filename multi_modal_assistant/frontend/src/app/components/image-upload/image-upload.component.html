@@ -1,0 +1,6 @@
+<div>
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  <div *ngIf="previewUrl" class="image-preview">
+    <img [src]="previewUrl" alt="Image preview" style="max-width: 300px; margin-top: 10px;">
+  </div>
+</div>

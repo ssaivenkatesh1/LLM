@@ -1,0 +1,32 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div class="container">
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <app-image-upload (imageSelected)="onImageSelected($event)"></app-image-upload>
+    </div>
+    <div class="col-md-6">
+      <app-query-input (querySubmitted)="onQuerySubmitted($event)"></app-query-input>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading...</p>
+  </div>
+
+  <div *ngIf="result" class="result-container">
+    <h2>Result:</h2>
+    <pre>{{ result | json }}</pre>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>
